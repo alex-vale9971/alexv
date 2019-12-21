@@ -1,0 +1,48 @@
+from tkinter import Tk, Frame, Label, Button
+import serial, time
+
+#Arduino
+arduino = serial.Serial('/dev/ttyUSB0', 9600)
+
+#Funciones
+def click1():
+    global arduino
+    time.sleep(2)
+    arduino.write(b'1')
+    
+
+def click2():
+    global arduino
+    time.sleep(2)
+    arduino.write(b'0')
+    
+
+def click3():
+    pass
+
+#Raìz
+root = Tk()
+root.title("Luces culeras")
+root.geometry("250x100")
+
+#Frames
+frameT = Frame(root)
+frameT.grid(column=0, row=0)
+frameB = Frame(root)
+frameB.grid(column=0, row=1)
+
+#Label
+lbl = Label(frameT, text="¿Queres encender las luces?", padx=20, pady=20, font=("Comic Sans MS", 10))
+lbl.grid(column=0, row=0)
+
+#Botones
+boton1 = Button(frameB, text="Si", command=click1, padx=10, pady=10, cursor="hand1")
+boton1.grid(column=0, row=1)
+
+boton2 = Button(frameB, text="No", command=click2, padx=10, pady=10, cursor="hand1")
+boton2.grid(column=1, row=1)
+
+boton3 = Button(frameB, text="No presionar", command=click3, padx=10, pady=10, cursor="hand1") 
+boton3.grid(column=2, row=1)
+
+root.mainloop()
